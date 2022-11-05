@@ -27,7 +27,7 @@
 # print(Decrypt("_5gchfebda+4bagchdf_5chfdebi_2bcfihegad^4edfbcigh_4fiecghda","key"))
 
 # from NewTry import Crypto as cp
-obj = {1,6,8}
+obj = (1,6,8)
 # print(obj)
 # a = cp.array(obj)
 
@@ -35,14 +35,17 @@ obj = {1,6,8}
 from data import cryptoop as cp
 
 a = cp.array(obj,"hi")
-a.add("helo") 
-# a.add(657)
-# a.add((1,2,(1,2)))
+print(a)
+# print(a.to_pyarray("hi"))
+
+# a.add("helo") 
+# # a.add(657)
+# # a.add((1,2,(1,2)))
+# # a.add({1,2})
 # a.add({1,2})
-a.add({1,2})
-print(type(a))
-print(a.to_pyarray("hi"))
-# a.add({1:2})
+# print(type(a))
+# print(a.to_pyarray("hi"))
+# # a.add({1:2})
 # a.add(1)
 # a.add(1)
 # a.add("helo")
@@ -51,14 +54,14 @@ print(a.to_pyarray("hi"))
 # print("count is : ",a.count(1))
 # # print(a.to_pyarray("hi"))
 # # print(a.len())
-# # a.extend([1,23,3,(12,32,[1,2])])
+# a.extend([1,23,3,(12,32,[1,2])])
 # print(a.index({1, 2}))
 # # a.insert(3,{"hello":"hi"})
 # # a.pop(-1)
 # a.remove(1)
-# # a.reverse()
-# # a.sort()
-# # print(a.to_pyarray("hi"))
+# a.reverse()
+# a.sort()
+# print(a.to_pyarray("hi"))
 
 # print(a)
 # print(a.to_pyarray("hi"))

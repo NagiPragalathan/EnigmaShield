@@ -80,6 +80,32 @@ def iters(obj,key,operation="en",type=list):
                         temp.append(int(i))
                     else:
                         temp.append(i)
+    elif isinstance(obj, tuple):
+        for i in obj:
+            if isinstance(i, list):
+                change = iters(i,key,operation,list)
+                temp.append(change)
+            elif isinstance(i, tuple):
+                change = iters(list(i),key,operation,tuple)
+                temp.append(change)
+            elif isinstance(i, set):
+                change = iters(list(i),key,operation,set)
+                temp.append(change)
+            elif isinstance(i, dict):
+                change = dict_type(i,key,operation)
+                temp.append(change)
+            else:
+                if ( operation == "en" ) :
+                    temp.append(Encrypt(str(i),key)) #................................
+                elif ( operation == "de" ) :
+                    temp.append(Decrypt(str(i),key))
+                elif ( operation == "str" ) :
+                    temp.append(str(i))
+                elif ( operation == "org" ) :
+                    if i.isdigit():
+                        temp.append(int(i))
+                    else:
+                        temp.append(i)
                     
     if type is list:
         return temp
@@ -226,6 +252,7 @@ class array :
     
     def copy(self):
         return self.Arrays
+    
 
     def to_pyarray(self,key):
         orginal = iters(self.Arrays,key,"de")
@@ -371,11 +398,18 @@ class Dict :
         orginalDic  = dict_type(self.Dict,self.Key,"de")
         orginalDic = dict_type(orginalDic,self.Key,"org")
         org = list(orginalDic.popitem())
-        encry = Diciters(org,self.Key)
+        self.Dict = dict_type(orginalDic,self.Key,"en")
+        encry = iters(org,self.Key)
         if security_key and security_key == self.Key:
             return org
         else:
             return encry
+        
+    def pop(self,key_value,security_key=False):
+        orginalDic  = dict_type(self.Dict,self.Key,"de")
+        orginalDic = dict_type(orginalDic,self.Key,"org")
+        orginalDic.pop(key_value)
+        self.Dict = dict_type(orginalDic,self.Key,"en")
     
 
     def from_keys(self,key,value=False,security_key=False):
@@ -389,6 +423,57 @@ class Dict :
 
     def __str__(self) -> str:
         return str(self.Dict)
+
+    def __repr__(self) -> str:
+        return "CryptoSet"
+    
+class Tuple :
+    def __init__(self,object : object, Key=False, LongCrypt=False, BaseType=False) -> None:
+        self.Tuple = tuple()
+        self.Key = Key
+        self.obj = object
+        temp = tuple()
+        if BaseType :
+            pass
+        elif LongCrypt:
+            pass
+        else:
+            self.Tuple = tuple(iters(object,Key))
+    
+    def count(self,element):
+        if isinstance(element, list):
+            obj_string = iters(element,self.Key,"str")
+        elif isinstance(element, int):
+            obj_string = str(element)
+        elif isinstance(element,tuple):
+            obj_string = tuple(iters(list(element),self.Key,"str"))
+        elif isinstance(element,set):
+            obj_string = set(iters(list(element),self.Key,"str"))
+        elif isinstance(element,dict):
+            obj_string = dict_type(element,self.Key,"str")
+        orginal = iters(self.Tuple,self.Key,"de")
+        count_is = orginal.count(obj_string)
+        return count_is
+    
+    def index(self,element):
+        if isinstance(element, list):
+            obj_string = iters(element,self.Key,"str")
+        elif isinstance(element, int):
+            obj_string = str(element)
+        elif isinstance(element,tuple):
+            obj_string = tuple(iters(list(element),self.Key,"str"))
+        elif isinstance(element,set):
+            obj_string = set(iters(list(element),self.Key,"str"))
+        elif isinstance(element,dict):
+            obj_string = dict_type(element,self.Key,"str")
+        orginal = iters(self.Tuple,self.Key,"de")
+        count_is = orginal.index(obj_string)
+        return count_is
+
+        
+            
+    def __str__(self) -> str:
+        return str(self.Tuple)
 
     def __repr__(self) -> str:
         return "CryptoSet"

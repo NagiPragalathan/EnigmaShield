@@ -8,18 +8,25 @@
 
 from data import cryptoop as cp
 
-a=cp.Dict({1:2,"23":"hie"},"hi")
-a.add("hello","nagi")
-print(a.get(23,"hi"))
-print(a.to_pyDict("hi"))
-b=a.setdefault("hi","hello")
-print("set default is : ",b)
-print("pop item is : ",a.popitem())
-print(a.to_pyDict("hi"))
-print(a.items())
-print(a.keys("hi"))
-print(a.values("hi"))
-print(a.from_keys((1,2),"hi",security_key="hi"))
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Dictinary>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+# a=cp.Dict({1:2,"23":"hie"},"hi")
+# a.add("hello","nagi")
+# print(a.get(23,"hi"))
+# print(a.to_pyDict("hi"))
+# b=a.setdefault("hi","hello")
+# print("set default is : ",b)
+# print("pop item is : ",a.popitem())
+# print("pop item is : ",a.pop(1))
+# print(a.to_pyDict("hi"))
+# print(a.items())
+# print(a.keys("hi"))
+# print(a.values("hi"))
+# print(a.from_keys((1,2),"hi",security_key="hi"))
+# print(a.to_pyDict("hi"))
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>Tuple>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
+# a = cp.Tuple((1,1,23,3,"hello",(1,2,((1,23),12,3))),"hi")
 
+# print(a)
+# print(a.index(23))
 
 

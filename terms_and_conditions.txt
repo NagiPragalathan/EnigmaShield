@@ -1,1 +1,7 @@
 please avoid string numerics it's not consider as string it's consider as numeric
+
+add extend in dict module
+
+
+
+add index and example[0] like thet
