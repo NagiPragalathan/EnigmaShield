@@ -106,6 +106,32 @@ def iters(obj,key,operation="en",type=list):
                         temp.append(int(i))
                     else:
                         temp.append(i)
+    elif isinstance(obj, set):
+        for i in obj:
+            if isinstance(i, list):
+                change = iters(i,key,operation,list)
+                temp.append(change)
+            elif isinstance(i, tuple):
+                change = iters(list(i),key,operation,tuple)
+                temp.append(change)
+            elif isinstance(i, set):
+                change = iters(list(i),key,operation,set)
+                temp.append(change)
+            elif isinstance(i, dict):
+                change = dict_type(i,key,operation)
+                temp.append(change)
+            else:
+                if ( operation == "en" ) :
+                    temp.append(Encrypt(str(i),key)) #................................
+                elif ( operation == "de" ) :
+                    temp.append(Decrypt(str(i),key))
+                elif ( operation == "str" ) :
+                    temp.append(str(i))
+                elif ( operation == "org" ) :
+                    if i.isdigit():
+                        temp.append(int(i))
+                    else:
+                        temp.append(i)
                     
     if type is list:
         return temp
@@ -293,6 +319,8 @@ class array :
             obj_string = iters(element,self.Key,"str")
         elif isinstance(element, int):
             obj_string = str(element)
+        elif isinstance(element, str):
+            obj_string = str(element)
         elif isinstance(element,tuple):
             obj_string = tuple(iters(list(element),self.Key,"str"))
         elif isinstance(element,set):
@@ -470,10 +498,162 @@ class Tuple :
         count_is = orginal.index(obj_string)
         return count_is
 
+    def to_pytuple(self,key):
+        orginal = iters(self.Tuple,key,"de")
+        orginal = iters(orginal,key,"org")
+        return tuple(orginal)
+
         
             
     def __str__(self) -> str:
         return str(self.Tuple)
+
+    def __repr__(self) -> str:
+        return "CryptoTuple"
+    
+class Set :
+    def __init__(self,object : object, Key=False, LongCrypt=False, BaseType=False) -> None:
+        self.Set = set()
+        self.Key = Key
+        self.obj = object
+        temp = set()
+        if BaseType :
+            pass
+        elif LongCrypt:
+            pass
+        else:
+            self.Set = set(iters(object,Key))
+    def copy(self):
+        return self.Set
+            
+    def add(self,element : object) :
+        if isinstance(element, list):
+            self.Set.add(iters(element,self.Key))
+        elif isinstance(element, int):
+            self.Set.add(Encrypt(str(element),self.Key))
+        elif isinstance(element, str):
+            self.Set.add(Encrypt(element,self.Key))
+        elif isinstance(element,tuple):
+            self.Set.add(tuple(iters(list(element),self.Key)))
+        elif isinstance(element,set):
+            self.Set.add(set(iters(list(element),self.Key)))
+        elif isinstance(element,dict):
+            self.Set.add(dict_type(element,self.Key))
+    
+    def to_pyset(self,key):
+        orginal = iters(self.Set,key,"de")
+        orginal = iters(orginal,key,"org")
+        return set(orginal)
+    
+    def clear(self):
+        self.Set = set()
+        return self.Set
+    
+    def remove(self,element):
+        if isinstance(element, list):
+            obj_string = iters(element,self.Key,"str")
+        elif isinstance(element, int):
+            obj_string = str(element)
+        elif isinstance(element, str):
+            obj_string = str(element)
+        elif isinstance(element,tuple):
+            obj_string = tuple(iters(list(element),self.Key,"str"))
+        elif isinstance(element,set):
+            obj_string = set(iters(list(element),self.Key,"str"))
+        elif isinstance(element,dict):
+            obj_string = dict_type(element,self.Key,"str")
+        orginal = iters(self.Set,self.Key,"de")
+        orginal.remove(obj_string)
+        self.Set = iters(orginal,self.Key,"en")
+    
+    def discard(self,element):
+        if isinstance(element, list):
+            obj_string = iters(element,self.Key,"str")
+        elif isinstance(element, int):
+            obj_string = str(element)
+        elif isinstance(element, str):
+            obj_string = str(element)
+        elif isinstance(element,tuple):
+            obj_string = tuple(iters(list(element),self.Key,"str"))
+        elif isinstance(element,set):
+            obj_string = set(iters(list(element),self.Key,"str"))
+        elif isinstance(element,dict):
+            obj_string = dict_type(element,self.Key,"str")
+        orginal = set(iters(self.Set,self.Key,"de"))
+        orginal.discard(obj_string)
+        self.Set = iters(orginal,self.Key,"en")
+
+    def difference(self,sets,security_key=False):
+        orginal = iters(self.Set,self.Key,"de")
+        orginal = set(iters(orginal,self.Key,"org"))
+        if security_key and security_key == self.Key:
+            return orginal.difference(sets)
+        else:
+            return set(iters(orginal.difference(sets),self.Key))
+    
+    def symmetric_difference(self,sets,security_key=False): 
+        orginal = iters(self.Set,self.Key,"de")
+        orginal = set(iters(orginal,self.Key,"org"))
+        if security_key and security_key == self.Key:
+            return orginal.symmetric_difference(sets)
+        else:
+            return set(iters(orginal.symmetric_difference(sets),self.Key))
+        
+    def issuperset(self,sets,security_key=False): 
+        orginal = iters(self.Set,self.Key,"de")
+        orginal = set(iters(orginal,self.Key,"org"))
+        if security_key and security_key == self.Key:
+            return orginal.issuperset(sets)
+        else:
+            return iters(orginal.issuperset(sets),self.Key)
+    
+    def issubset(self,sets,security_key=False): 
+        orginal = iters(self.Set,self.Key,"de")
+        orginal = set(iters(orginal,self.Key,"org"))
+        if security_key and security_key == self.Key:
+            return orginal.issubset(sets)
+        else:
+            return iters(orginal.issubset(sets),self.Key)
+
+    def isdisjoint(self,sets,security_key=False): 
+        orginal = iters(self.Set,self.Key,"de")
+        orginal = set(iters(orginal,self.Key,"org"))
+        if security_key and security_key == self.Key:
+            return orginal.isdisjoint(sets)
+        else:
+            return iters(orginal.isdisjoint(sets),self.Key)
+
+    def intersection(self,*argv,security_key=False):
+        orginal = iters(self.Set,self.Key,"de")
+        orginal = set(iters(orginal,self.Key,"org"))
+        if security_key and security_key == self.Key:
+            return orginal.intersection(argv)
+        else:
+            return set(iters(orginal.intersection(argv),self.Key))
+        
+    def difference_update(self,sets):
+        orginal = iters(self.Set,self.Key,"de")
+        orginal = set(iters(orginal,self.Key,"org"))
+        orginal.difference_update(sets)
+        self.Set = set(iters(orginal,self.Key))
+    
+    def update(self,sets):
+        orginal = iters(self.Set,self.Key,"de")
+        orginal = set(iters(orginal,self.Key,"org"))
+        orginal.update(sets)
+        self.Set = set(iters(orginal,self.Key))
+    
+    def symmetric_difference_update(self,sets):
+        orginal = iters(self.Set,self.Key,"de")
+        orginal = set(iters(orginal,self.Key,"org"))
+        orginal.symmetric_difference_update(sets)
+        self.Set = set(iters(orginal,self.Key))
+    
+    def pop(self):
+        return self.Set.pop()
+        
+    def __str__(self) -> str:
+        return str(self.Set)
 
     def __repr__(self) -> str:
         return "CryptoSet"

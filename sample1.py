@@ -27,6 +27,26 @@ from data import cryptoop as cp
 # a = cp.Tuple((1,1,23,3,"hello",(1,2,((1,23),12,3))),"hi")
 
 # print(a)
+# print(a.count(1))
 # print(a.index(23))
+# print(a.to_pytuple("hi"))
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.Set.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
 
 
+a = cp.Set({"a", "b", "c"},"hello")
+x = {"a", "b", "c"}
+y = {"f", "e", "d", "c", "b", "a"}
+z = {"f", "g", "c"}
+# a.add((1,2))
+# a.add(7)
+# a.remove(7)
+# a.pop()
+# b={"google", "microsoft", "apple"}
+# print(a.difference_update(b,"hello"))
+# a.discard("banana")
+# print(a.intersection(y,z,security_key="hello"))
+print(a.isdisjoint(y))
+print(a.to_pyset("hello"))
+
+print(a)
