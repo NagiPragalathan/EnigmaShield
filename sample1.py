@@ -34,19 +34,52 @@ from data import cryptoop as cp
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.Set.>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>.
 
 
-a = cp.Set({"a", "b", "c"},"hello")
-x = {"a", "b", "c"}
-y = {"f", "e", "d", "c", "b", "a"}
-z = {"f", "g", "c"}
-# a.add((1,2))
-# a.add(7)
-# a.remove(7)
-# a.pop()
-# b={"google", "microsoft", "apple"}
-# print(a.difference_update(b,"hello"))
-# a.discard("banana")
-# print(a.intersection(y,z,security_key="hello"))
-print(a.isdisjoint(y))
-print(a.to_pyset("hello"))
+# a = cp.Set({"a", "b", "c"},"hello")
+# x = {"a", "b", "c"}
+# y = {"f", "e", "d", "c", "b", "a"}
+# z = {"f", "g", "c"}
+# # a.add((1,2))
+# # a.add(7)
+# # a.remove(7)
+# # a.pop()
+# # b={"google", "microsoft", "apple"}
+# # print(a.difference_update(b,"hello")) 
+# # a.discard("banana")
+# # print(a.intersection(y,z,security_key="hello"))
+# print(a.isdisjoint(y))
+# print(a.to_pyset("hello"))
+
+# print(a)
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>String>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+a=cp.String("hello hi hi","hi")
+print(a.capitalize("hi"))
+print(a.casefold("hi"))
+print(a.center(20,security_key="hi"))
+print(a.zfill(15,security_key="hi"))
+print(a.upper(security_key="hi"))
+print(a.lower(security_key="hi"))
+print(a.title(security_key="hi"))
+print(a.swapcase(security_key="hi"))
+print("hia",a.strip(" ",security_key="hi"))
+print(a.split(" ",security_key="hi"))
+print(a.split(" "))
+print(a.istitle(security_key="hi"))
+print(a.istitle())
+print(a.isalnum(security_key="hi"))
+print(a.isalpha(security_key="hi"))
+print(a.isascii(security_key="hi"))
+print(a.isdecimal(security_key="hi"))
+print(a.isdigit(security_key="hi"))
+print(a.isidentifier(security_key="hi"))
+print(a.islower(security_key="hi"))
+print(a.isnumeric(security_key="hi"))
+print(a.isprintable(security_key="hi"))
+print(a.isspace(security_key="hi"))
+print(a.find("h"))
+
+
+
+
 
 print(a)

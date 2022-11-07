@@ -657,3 +657,190 @@ class Set :
 
     def __repr__(self) -> str:
         return "CryptoSet"
+
+
+class String :
+    def __init__(self,object : object, Key=False, LongCrypt=False, BaseType=False) -> None:
+        self.String = str()
+        self.Key = Key
+        self.obj = object
+        temp = str()
+        if BaseType :
+            pass
+        elif LongCrypt:
+            pass
+        else:
+            self.String = Encrypt(object,Key)
+    
+    def capitalize(self,security_key=False): 
+        String = Decrypt(self.String,self.Key).capitalize()
+        if security_key and security_key == self.Key:
+            return String
+        else:
+            return Encrypt(String,self.Key)
+    
+    def upper(self,security_key=False): 
+        String = Decrypt(self.String,self.Key).upper()
+        if security_key and security_key == self.Key:
+            return String
+        else:
+            return Encrypt(String,self.Key)
+        
+    def lower(self,security_key=False): 
+        String = Decrypt(self.String,self.Key).lower()
+        if security_key and security_key == self.Key:
+            return String
+        else:
+            return Encrypt(String,self.Key)
+        
+    def swapcase(self,security_key=False): 
+        String = Decrypt(self.String,self.Key).swapcase()
+        if security_key and security_key == self.Key:
+            return String
+        else:
+            return Encrypt(String,self.Key)
+    
+    def title(self,security_key=False): 
+        String = Decrypt(self.String,self.Key).title()
+        if security_key and security_key == self.Key:
+            return String
+        else:
+            return Encrypt(String,self.Key)
+        
+    def casefold(self,security_key=False): 
+        String = Decrypt(self.String,self.Key).casefold()
+        if security_key and security_key == self.Key:
+            return String
+        else:
+            return Encrypt(String,self.Key)
+        
+    def istitle(self,security_key=False): 
+        String = Decrypt(self.String,self.Key).istitle()
+        if security_key and security_key == self.Key:
+            return String
+        else:
+            return Encrypt(str(String),self.Key)
+        
+    def zfill(self,len,security_key=False): 
+        String = Decrypt(self.String,self.Key).zfill(len)
+        if security_key and security_key == self.Key:
+            return String
+        else:
+            return Encrypt(String,self.Key)
+        
+    def strip(self,character,security_key=False): 
+        String = Decrypt(self.String,self.Key).strip(character)
+        if security_key and security_key == self.Key:
+            return String
+        else:
+            return Encrypt(String,self.Key)
+        
+    def center(self,length, character=False,security_key=False): 
+        if character == True:
+            String = Decrypt(self.String,self.Key).center(length, character)
+        else:
+            String = Decrypt(self.String,self.Key).center(length)
+        if security_key and security_key == self.Key:
+            return String
+        else:
+            return Encrypt(String,self.Key)
+    def split(self,separator, maxsplit=False,security_key=False): 
+        if maxsplit == True:
+            String = Decrypt(self.String,self.Key).split(separator, maxsplit)
+        else:
+            String = Decrypt(self.String,self.Key).split(separator)
+        if security_key and security_key == self.Key:
+            return String
+        else:
+            return iters(String,self.Key) 
+    
+    def isalnum(self,security_key=False): 
+            String = Decrypt(self.String,self.Key).isalnum()
+            if security_key and security_key == self.Key:
+                return String
+            else:
+                return Encrypt(str(String),self.Key)
+    def isalpha(self,security_key=False): 
+            String = Decrypt(self.String,self.Key).isalpha()
+            if security_key and security_key == self.Key:
+                return String
+            else:
+                return Encrypt(str(String),self.Key)
+    def isascii(self,security_key=False): 
+            String = Decrypt(self.String,self.Key).isascii()
+            if security_key and security_key == self.Key:
+                return String
+            else:
+                return Encrypt(str(String),self.Key)
+    def isdecimal(self,security_key=False): 
+            String = Decrypt(self.String,self.Key).isdecimal()
+            if security_key and security_key == self.Key:
+                return String
+            else:
+                return Encrypt(str(String),self.Key)
+    def isdigit(self,security_key=False): 
+            String = Decrypt(self.String,self.Key).isdigit()
+            if security_key and security_key == self.Key:
+                return String
+            else:
+                return Encrypt(str(String),self.Key)
+    def isidentifier(self,security_key=False): 
+            String = Decrypt(self.String,self.Key).isidentifier()
+            if security_key and security_key == self.Key:
+                return String
+            else:
+                return Encrypt(str(String),self.Key)
+    def islower(self,security_key=False): 
+            String = Decrypt(self.String,self.Key).islower()
+            if security_key and security_key == self.Key:
+                return String
+            else:
+                return Encrypt(str(String),self.Key)
+    def isnumeric(self,security_key=False): 
+            String = Decrypt(self.String,self.Key).isnumeric()
+            if security_key and security_key == self.Key:
+                return String
+            else:
+                return Encrypt(str(String),self.Key)
+    def isprintable(self,security_key=False): 
+            String = Decrypt(self.String,self.Key).isprintable()
+            if security_key and security_key == self.Key:
+                return String
+            else:
+                return Encrypt(str(String),self.Key)
+    def isspace(self,security_key=False): 
+            String = Decrypt(self.String,self.Key).isspace()
+            if security_key and security_key == self.Key:
+                return String
+            else:
+                return Encrypt(str(String),self.Key)
+    
+    def find(self,value,start=False,end=False):
+        if start == False and end == False :
+            String = Decrypt(self.String,self.Key).find(value)
+        elif end == False :
+            String = Decrypt(self.String,self.Key).find(value,start)
+        if start == False and end == False :
+            String = Decrypt(self.String,self.Key).find(value,start,end)
+        return String
+    
+    
+    # def count(self,value, start=False, end=False,security_key=False): 
+    #     str_ = 0
+    #     if start and end :
+    #         str_ = (Decrypt(self.String,self.Key)).count(value,start,end)
+    #     elif start:
+    #         str_ = (Decrypt(self.String,self.Key)).count(value,start)
+    #     elif start:
+    #         str_ = (Decrypt(self.String,self.Key)).count(value)
+    #     print(Decrypt(self.String,self.Key))
+    #     if security_key and security_key == self.Key:000
+    #         return str_
+    #     else:
+    #         return Encrypt(str(str_),self.Key)
+        
+    def __str__(self) -> str:
+        return str(self.String)
+
+    def __repr__(self) -> str:
+        return "CryptoString"
