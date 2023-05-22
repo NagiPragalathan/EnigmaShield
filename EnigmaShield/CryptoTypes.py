@@ -8,20 +8,81 @@ EncryptType=3
 
 class Keys:
     def __init__(self):
+        """
+        Initializes a Keys object with the common key and encryption type.
+
+        Args:
+            None.
+
+        Returns:
+            None.
+
+        Raises:
+            None.
+        """
+
         global commonKey, EncryptType
         self.commonKey = commonKey
         self.encrypt_type=EncryptType
     def getkey(self):
+        """
+        Retrieves the common key.
+
+        Args:
+            None.
+
+        Returns:
+            str: The common key.
+
+        Raises:
+            None.
+        """
         return self.commonKey
     def setkey(self,key):
+        """
+        Sets the common key.
+
+        Args:
+            key (str): The new common key.
+
+        Returns:
+            None.
+
+        Raises:
+            None.
+        """
         global commonKey
         self.commonKey = key
         commonKey = self.commonKey
     def setType(self,Encrypt_type):
+        """
+        Sets the encryption type.
+
+        Args:
+            Encrypt_type (str): The new encryption type.
+
+        Returns:
+            None.
+
+        Raises:
+            None.
+        """
         global EncryptType
         self.encrypt_type=Encrypt_type
         EncryptType = Encrypt_type
     def getType(self):
+        """
+        Retrieves the encryption type.
+
+        Args:
+            None.
+
+        Returns:
+            str: The encryption type.
+
+        Raises:
+            None.
+        """
         return self.encrypt_type
         
 
@@ -29,6 +90,7 @@ class Keys:
 
 class array:
     def __init__(self, object: object, Key=False, Type=3, LongCrypt=False, BaseType=False) -> None:
+        """The array class has an __init__ method that initializes the object with various attributes and determines the encryption type based on the provided parameters."""
         self.Arrays = []
         obj = Keys()
         if Type:

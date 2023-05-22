@@ -15,6 +15,19 @@ DecryptedStr: NewType = NewType('DecryptedStr', str)
 
 
 def Encrypt(String: str, key: str) -> EncryptedStr:
+    """
+    Encrypts a string using the provided key.
+
+    Args:
+        String (str): The string to be encrypted.
+        key (str): The encryption key.
+
+    Returns:
+        EncryptedStr: The encrypted string.
+
+    Raises:
+        None.
+    """
     count: int = 0
     Encrypt: str = str()
     EncryptedString: str = str()
@@ -36,6 +49,19 @@ def Encrypt(String: str, key: str) -> EncryptedStr:
 
 
 def Decrypt(Encrypted, key) -> DecryptedStr:
+    """
+    Decrypts an encrypted string using the provided key.
+
+    Args:
+        Encrypted: The encrypted string.
+        key: The encryption key.
+
+    Returns:
+        DecryptedStr: The decrypted string.
+
+    Raises:
+        None.
+    """
     SymbolSetOne: list = ['#', '~', '!']
     SymbolSetTwo: list = ['^', '$', '&', '_', '+']
     encoded: list = []
@@ -73,6 +99,18 @@ def Decrypt(Encrypted, key) -> DecryptedStr:
 
 
 def KeyEncrypt(String: str) -> EncryptedStr:
+    """
+    Encrypts a string and generates an encryption key.
+
+    Args:
+        String (str): The string to be encrypted.
+
+    Returns:
+        tuple: A tuple containing the encrypted string and the encryption key.
+
+    Raises:
+        None.
+    """
     count: int = 0
     Key: list = []
     Encrypt: str = str()
@@ -97,6 +135,19 @@ def KeyEncrypt(String: str) -> EncryptedStr:
 
 
 def Keydecrypt(Encrypted, key) -> DecryptedStr:
+    """
+    Decrypts an encrypted string using the provided key.
+
+    Args:
+        Encrypted: The encrypted string.
+        key: The encryption key.
+
+    Returns:
+        DecryptedStr: The decrypted string.
+
+    Raises:
+        None.
+    """
     SymbolSetOne = ['#', '~', '!']
     SymbolSetTwo = ['^', '$', '&']
     encoded = []
@@ -138,6 +189,20 @@ def Keydecrypt(Encrypted, key) -> DecryptedStr:
 
 # encode
 def FileEncrypt(FilePath: str, Key: str, FileToSave: str = False) -> Union[str, EncryptedStr]:
+    """
+    Encrypts a file using the provided key.
+
+    Args:
+        FilePath (str): The path to the file to be encrypted.
+        Key (str): The encryption key.
+        FileToSave (str, optional): The path to save the encrypted file. If not provided, the encrypted string is returned. Defaults to False.
+
+    Returns:
+        Union[str, EncryptedStr]: The encrypted string if FileToSave is not provided, otherwise None.
+
+    Raises:
+        None.
+    """
     ReadFile: file = open(FilePath, "rb")
     B64encoded = base64.b64encode(ReadFile.read())
     Cryptted = ''
@@ -160,6 +225,20 @@ def FileEncrypt(FilePath: str, Key: str, FileToSave: str = False) -> Union[str, 
 
 
 def FileDecrypt(Encrypted: str, Key: str, FileToSave: str) -> DecryptedStr:
+    """
+    Decrypts an encrypted string and saves the decrypted file.
+
+    Args:
+        Encrypted (str): The encrypted string.
+        Key (str): The encryption key.
+        FileToSave (str): The path to save the decrypted file.
+
+    Returns:
+        DecryptedStr: The decrypted string.
+
+    Raises:
+        None.
+    """
     convertKey = 0
     if (Encrypted[0:2] == '0x'):
         convertKey = 0
@@ -191,6 +270,21 @@ def FileDecrypt(Encrypted: str, Key: str, FileToSave: str) -> DecryptedStr:
 
 
 def BaseEncrypt(String: str, Key: str, Base: int):
+    """
+    Encrypts a string using the provided key and base.
+
+    Args:
+        String (str): The string to be encrypted.
+        Key (str): The encryption key.
+        Base (int): The base for encryption (16, 8, or 2).
+
+    Returns:
+        str: The encrypted string.
+
+    Raises:
+        None.
+    """
+
     Choice = choice([1, 2, 3, 4])
     Cryptted = str()
     for i in str(String+Key+str(len(Key))):
@@ -204,6 +298,20 @@ def BaseEncrypt(String: str, Key: str, Base: int):
 
 
 def easyEncrypt(String: str, Key: str, OnlyNormalChar=False) -> EncryptedStr:
+    """
+    Encrypts a string using the provided key and random encryption method.
+
+    Args:
+        String (str): The string to be encrypted.
+        Key (str): The encryption key.
+        OnlyNormalChar (bool, optional): Whether to encrypt only normal characters. Defaults to False.
+
+    Returns:
+        EncryptedStr: The encrypted string.
+
+    Raises:
+        None.
+    """
     Choice = choice([1, 2, 3])
     encrypt = str()
     type_ = ""
@@ -247,6 +355,19 @@ def easyEncrypt(String: str, Key: str, OnlyNormalChar=False) -> EncryptedStr:
 
 
 def easyDectypt(Encryptedobj: object, Key):
+    """
+    Decrypts an encrypted string using the provided key.
+
+    Args:
+        Encryptedobj (object): The encrypted string object.
+        Key (str): The encryption key.
+
+    Returns:
+        str: The decrypted string.
+
+    Raises:
+        None.
+    """
     output = ""
     find_clue = ["\l", "\q", "\s", "\h"]
     find_clue_1 = ["\\l", "\\q", "\\s", "\\h"]
