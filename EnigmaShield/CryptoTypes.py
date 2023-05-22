@@ -1,5 +1,5 @@
 from .CryptoBloom import Encrypt, Decrypt, easyEncrypt, easyDectypt, encrypt, decrypt, RSAdecrypt, RSAencrypt
-
+from typing import Union
 
 
 commonKey=False
@@ -2426,269 +2426,541 @@ class String:
     def join(self, iterable):
         return String(self.String.join(iterable))
 
-
 class Int:
-    def __init__(self, value, key=False, Type=3):
-        if Type:
-            self.type = Type
-        else:
-            self.type = obj.getType()
+    def __init__(self, value: int, key: str = "", Type: int = 3):
+        """
+        Initializes an Int object.
+
+        Args:
+            value (int): The value to store in the Int object.
+            key (str): The encryption key to use (optional).
+            Type (int): The encryption type to use (optional).
+
+        Returns:
+            None
+        """
+        self.type = Type
         if key:
             self.key = key
             self.Key = self.key
-            key = self.key
-            Key = self.key
         else:
             obj = Keys()
             self.Key = obj.getkey()
             self.key = obj.getkey()
-            Key = obj.getkey()
-            Key = obj.getkey()
-        if self.type==4:
-            self.value = self.CryptoType(str(value), key)
+        if self.type == 4:
+            self.value = self.CryptoType(str(value), self.key)
         else:
-            self.value = self.CryptoType(value, key)
+            self.value = self.CryptoType(value, self.key)
 
-    def CryptoType(self, String: str, key: str):
+    def CryptoType(self, value: Union[str, int], key: str) -> Union[str, int]:
+        """
+        Applies encryption to the given value based on the encryption type and key.
+
+        Args:
+            value (Union[str, int]): The value to encrypt.
+            key (str): The encryption key.
+
+        Returns:
+            Union[str, int]: The encrypted value.
+        """
         if self.type == 1:
-            return Encrypt(String, key)
+            return Encrypt(str(value), key)
         elif self.type == 2:
-            return easyEncrypt(String, key)
+            return easyEncrypt(str(value), key)
         elif self.type == 3:
-            return encrypt(String, key)
+            return encrypt(str(value), key)
         elif self.type == 4:
-            return RSAencrypt(String, key)
+            return RSAencrypt(str(value), key)
 
-    def DeCryptoType(self, String: str, key: str):
+    def DeCryptoType(self, value: Union[str, int], key: str) -> Union[str, int]:
+        """
+        Applies decryption to the given value based on the encryption type and key.
+
+        Args:
+            value (Union[str, int]): The value to decrypt.
+            key (str): The encryption key.
+
+        Returns:
+            Union[str, int]: The decrypted value.
+        """
         if self.type == 1:
-            return Decrypt(String, key)
+            return Decrypt(str(value), key)
         elif self.type == 2:
-            return easyDectypt(String, key)
+            return easyDectypt(str(value), key)
         elif self.type == 3:
-            return decrypt(String, key)
+            return decrypt(str(value), key)
         elif self.type == 4:
-            return RSAdecrypt(String, key)
+            return RSAdecrypt(str(value), key)
 
-    def get_int(self, key):
+    def get_int(self, key: str) -> int:
+        """
+        Retrieves the integer value of the Int object.
+
+        Args:
+            key (str): The decryption key.
+
+        Returns:
+            int: The decrypted integer value.
+        """
         if key == self.key:
-            return self.DeCryptoType(self.value, self.Key)
+            return int(self.DeCryptoType(self.value, self.Key))
         elif self.type == 4:
-            return self.DeCryptoType(self.value, key)
+            return int(self.DeCryptoType(self.value, key))
 
-    def __int__(self):
+    def __int__(self) -> int:
+        """
+        Converts the Int object to an integer.
+
+        Returns:
+            int: The decrypted integer value.
+        """
         return int(self.value)
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """
+        Converts the Int object to a string.
+
+        Returns:
+            str: The decrypted string value.
+        """
         return str(self.value)
 
-    def get_repr(self, key):
+    def get_repr(self, key: str) -> str:
+        """
+        Retrieves the representation of the Int object.
+
+        Args:
+            key (str): The decryption key.
+
+        Returns:
+            str: The representation of the Int object.
+        """
         if self.Key == key:
             return f"Int({self.DeCryptoType(self.value, self.Key)})"
         else:
             return f"Int({self.value})"
 
-    def __repr__(self):
+    def __repr__(self) -> str:
+        """
+        Returns the representation of the Int object.
+
+        Returns:
+            str: The representation of the Int object.
+        """
         return f"Int({self.value})"
 
-    def __float__(self):
+    def __float__(self) -> float:
+        """
+        Converts the Int object to a float.
+
+        Returns:
+            float: The decrypted float value.
+        """
         return float(self.value)
 
-    def get_float(self, key):
+    def get_float(self, key: str) -> float:
+        """
+        Retrieves the float value of the Int object.
+
+        Args:
+            key (str): The decryption key.
+
+        Returns:
+            float: The decrypted float value.
+        """
         if self.Key == key:
             return float(self.DeCryptoType(self.value, self.Key))
         else:
             return float(self.value)
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
+        """
+        Converts the Int object to a boolean.
+
+        Returns:
+            bool: The decrypted boolean value.
+        """
         return bool(self.DeCryptoType(self.value, self.Key))
 
-    def __eq__(self, other):
+    def __eq__(self, other: Union['Int', int, float]) -> bool:
+        """
+        Compares the equality of the Int object with another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to compare with.
+
+        Returns:
+            bool: True if the values are equal, False otherwise.
+        """
         if isinstance(other, Int):
             return int(self.DeCryptoType(self.value, self.Key)) == other.value
         elif isinstance(other, (int, float)):
             return int(self.DeCryptoType(self.value, self.Key)) == other
         return False
 
-    def __lt__(self, other):
+    def __lt__(self, other: Union['Int', int, float]) -> bool:
+        """
+        Checks if the Int object is less than another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to compare with.
+
+        Returns:
+            bool: True if the Int value is less than the other value, False otherwise.
+        """
         if isinstance(other, Int):
             return int(self.DeCryptoType(self.value, self.Key)) < other.value
         elif isinstance(other, (int, float)):
             return int(self.DeCryptoType(self.value, self.Key)) < other
         return NotImplemented
 
-    def __le__(self, other):
+    def __le__(self, other: Union['Int', int, float]) -> bool:
+        """
+        Checks if the Int object is less than or equal to another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to compare with.
+
+        Returns:
+            bool: True if the Int value is less than or equal to the other value, False otherwise.
+        """
         if isinstance(other, Int):
             return int(self.DeCryptoType(self.value, self.Key)) <= other.value
         elif isinstance(other, (int, float)):
             return int(self.DeCryptoType(self.value, self.Key)) <= other
         return NotImplemented
 
-    def __gt__(self, other):
+    def __gt__(self, other: Union['Int', int, float]) -> bool:
+        """
+        Checks if the Int object is greater than another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to compare with.
+
+        Returns:
+            bool: True if the Int value is greater than the other value, False otherwise.
+        """
         if isinstance(other, Int):
             return int(self.DeCryptoType(self.value, self.Key)) > other.value
         elif isinstance(other, (int, float)):
             return int(self.DeCryptoType(self.value, self.Key)) > other
         return NotImplemented
 
-    def __ge__(self, other):
+    def __ge__(self, other: Union['Int', int, float]) -> bool:
+        """
+        Checks if the Int object is greater than or equal to another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to compare with.
+
+        Returns:
+            bool: True if the Int value is greater than or equal to the other value, False otherwise.
+        """
         if isinstance(other, Int):
             return int(self.DeCryptoType(self.value, self.Key)) >= other.value
         elif isinstance(other, (int, float)):
             return int(self.DeCryptoType(self.value, self.Key)) >= other
         return NotImplemented
 
-    def __add__(self, other):
+    def __add__(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Adds the Int object with another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to add.
+
+        Returns:
+            Int: The resulting Int object after addition.
+        """
         if isinstance(other, Int):
             return Int(self.DeCryptoType(self.value, self.Key) + other.value, self.Key)
         elif isinstance(other, (int, float)):
             return Int(int(self.DeCryptoType(self.value, self.Key)) + other, self.Key)
         return NotImplemented
 
-    def add(self, other):
+    def add(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Adds the Int object with another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to add.
+
+        Returns:
+            Int: The resulting Int object after addition.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) + int(self.DeCryptoType(other, self.Key)), self.Key)
         elif isinstance(other, (int, float)):
             return Int(int(self.DeCryptoType(self.value, self.Key)) + other, self.Key)
         return NotImplemented
 
-    def __radd__(self, other):
+    def __radd__(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Adds the Int object with another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to add.
+
+        Returns:
+            Int: The resulting Int object after addition.
+        """
         return self.__add__(other)
 
-    def __sub__(self, other):
+    def __sub__(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Subtracts another object from the Int object.
+
+        Args:
+            other (Union[Int, int, float]): The object to subtract.
+
+        Returns:
+            Int: The resulting Int object after subtraction.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) - other.value, self.Key)
         elif isinstance(other, (int, float)):
             return Int(int(self.DeCryptoType(self.value, self.Key)) - other, self.Key)
         return NotImplemented
 
-    def sub(self, other):
+    def sub(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Subtracts another object from the Int object.
+
+        Args:
+            other (Union[Int, int, float]): The object to subtract.
+
+        Returns:
+            Int: The resulting Int object after subtraction.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) - int(self.DeCryptoType(other, self.Key)), self.Key)
         elif isinstance(other, (int, float)):
             return Int(int(self.DeCryptoType(self.value, self.Key)) - other, self.Key)
         return NotImplemented
 
-    def __rsub__(self, other):
+    def __rsub__(self, other: Union[int, float]) -> 'Int':
+        """
+        Subtracts the Int object from another object.
+
+        Args:
+            other (Union[int, float]): The object to subtract from.
+
+        Returns:
+            Int: The resulting Int object after subtraction.
+        """
         if isinstance(other, (int, float)):
             return Int(other - int(self.DeCryptoType(self.value, self.Key)), self.Key)
         return NotImplemented
 
-    def rsub(self, other):
-        if isinstance(other, (int, float)):
-            return Int(other - int(self.DeCryptoType(self.value, self.Key)), self.Key)
-        else:
-            return Int(int(self.DeCryptoType(other, self.Key)) - int(self.DeCryptoType(self.value, self.Key)), self.Key)
-        return NotImplemented
+    def __mul__(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Multiplies the Int object with another object.
 
-    def __mul__(self, other):
+        Args:
+            other (Union[Int, int, float]): The object to multiply.
+
+        Returns:
+            Int: The resulting Int object after multiplication.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) * other.value, self.Key)
         elif isinstance(other, (int, float)):
             return Int(int(self.DeCryptoType(self.value, self.Key)) * other, self.Key)
         return NotImplemented
 
-    def mul(self, other):
+    def mul(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Multiplies the Int object with another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to multiply.
+
+        Returns:
+            Int: The resulting Int object after multiplication.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) * int(self.DeCryptoType(other, self.Key)), self.Key)
         elif isinstance(other, (int, float)):
             return Int(int(self.DeCryptoType(self.value, self.Key)) * other, self.Key)
         return NotImplemented
 
-    def __rmul__(self, other):
+    def __rmul__(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Multiplies the Int object with another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to multiply.
+
+        Returns:
+            Int: The resulting Int object after multiplication.
+        """
         return self.__mul__(other)
 
-    def rmul(self, other):
-        if isinstance(other, Int):
-            return self.__mul__(int(self.DeCryptoType(other, self.Key)))
-        else:
-            return self.__mul__(other)
+    def __truediv__(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Divides the Int object by another object.
 
-    def __truediv__(self, other):
+        Args:
+            other (Union[Int, int, float]): The object to divide by.
+
+        Returns:
+            Int: The resulting Int object after division.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) / other.value, self.Key)
         elif isinstance(other, (int, float)):
             return Int(int(self.DeCryptoType(self.value, self.Key)) / other, self.Key)
         return NotImplemented
 
-    def truediv(self, other):
+    def div(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Divides the Int object by another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to divide by.
+
+        Returns:
+            Int: The resulting Int object after division.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) / int(self.DeCryptoType(other, self.Key)), self.Key)
         elif isinstance(other, (int, float)):
             return Int(int(self.DeCryptoType(self.value, self.Key)) / other, self.Key)
         return NotImplemented
 
-    def __rtruediv__(self, other):
+    def __rtruediv__(self, other: Union[int, float]) -> 'Int':
+        """
+        Divides another object by the Int object.
+
+        Args:
+            other (Union[int, float]): The object to divide.
+
+        Returns:
+            Int: The resulting Int object after division.
+        """
         if isinstance(other, (int, float)):
-            return Int(other // int(self.DeCryptoType(self.value, self.Key)), self.Key)
+            return Int(other / int(self.DeCryptoType(self.value, self.Key)), self.Key)
         return NotImplemented
 
-    def rtruediv(self, other):
-        if isinstance(other, (int, float)):
-            return Int(other // int(self.DeCryptoType(self.value, self.Key)), self.Key)
-        else:
-            return Int(int(self.DeCryptoType(other, self.Key)) // int(self.DeCryptoType(self.value, self.Key)), self.Key)
-        return NotImplemented
+    def __floordiv__(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Performs integer division of the Int object by another object.
 
-    def __floordiv__(self, other):
+        Args:
+            other (Union[Int, int, float]): The object to divide by.
+
+        Returns:
+            Int: The resulting Int object after integer division.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) // other.value, self.Key)
         elif isinstance(other, (int, float)):
             return Int(int(self.DeCryptoType(self.value, self.Key)) // other, self.Key)
         return NotImplemented
 
-    def floordiv(self, other):
+    def floordiv(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Performs integer division of the Int object by another object.
+
+        Args:
+            other (Union[Int, int, float]): The object to divide by.
+
+        Returns:
+            Int: The resulting Int object after integer division.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) // int(self.DeCryptoType(other, self.Key)), self.Key)
         elif isinstance(other, (int, float)):
-            return Int(other // int(self.DeCryptoType(other, self.Key)), self.Key)
+            return Int(int(self.DeCryptoType(self.value, self.Key)) // other, self.Key)
         return NotImplemented
 
-    def __rfloordiv__(self, other):
+    def __rfloordiv__(self, other: Union[int, float]) -> 'Int':
+        """
+        Performs integer division of another object by the Int object.
+
+        Args:
+            other (Union[int, float]): The object to divide.
+
+        Returns:
+            Int: The resulting Int object after integer division.
+        """
         if isinstance(other, (int, float)):
             return Int(other // int(self.DeCryptoType(self.value, self.Key)), self.Key)
         return NotImplemented
 
-    def rfloordiv(self, other):
-        if isinstance(other, (int, float)):
-            return Int(other // int(self.DeCryptoType(self.value, self.Key)), self.Key)
-        else:
-            return Int(int(self.DeCryptoType(other, self.Key)) // int(self.DeCryptoType(self.value, self.Key)), self.Key)
-        return NotImplemented
+    def __mod__(self, other: Union['Int', int, float]) -> 'Int':
+        """
+        Performs modulo operation of the Int object with another object.
 
-    def __mod__(self, other):
+        Args:
+            other (Union[Int, int, float]): The object to perform modulo with.
+
+        Returns:
+            Int: The resulting Int object after modulo operation.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) % other.value, self.Key)
         elif isinstance(other, (int, float)):
             return Int(int(self.DeCryptoType(self.value, self.Key)) % other, self.Key)
         return NotImplemented
 
-    def mod(self, other):
-        if isinstance(other, Int):
-            return Int(int(self.DeCryptoType(self.value, self.Key)) % int(self.DeCryptoType(other, self.Key)), self.Key)
-        elif isinstance(other, (int, float)):
-            return other % int(self.DeCryptoType(other, self.Key))
-        return NotImplemented
+    
+    def __pow__(self, other: Union['Int', Union[int, float]]) -> 'Int':
+        """
+        Exponentiates the encrypted value by the given value.
 
-    def __pow__(self, other):
+        Args:
+            other (Union['Int', Union[int, float]]): The value to raise the encrypted value to.
+
+        Returns:
+            'Int': A new Int object representing the result of the exponentiation.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) ** other.value, self.Key)
         elif isinstance(other, (int, float)):
             return Int(int(self.DeCryptoType(self.value, self.Key)) ** other, self.Key)
         return NotImplemented
 
-    def pow(self, other):
+    def pow(self, other: Union['Int', Union[int, float]]) -> 'Int':
+        """
+        Exponentiates the encrypted value by the given value.
+
+        Args:
+            other (Union['Int', Union[int, float]]): The value to raise the encrypted value to.
+
+        Returns:
+            'Int': A new Int object representing the result of the exponentiation.
+        """
         if isinstance(other, Int):
             return Int(int(self.DeCryptoType(self.value, self.Key)) ** int(self.DeCryptoType(other, self.Key)), self.Key)
         elif isinstance(other, (int, float)):
             return Int(other ** int(self.DeCryptoType(self.value, self.Key)), self.Key)
         return NotImplemented
 
-    def __rpow__(self, other):
+    def __rpow__(self, other: Union[int, float]) -> 'Int':
+        """
+        Exponentiates the given value by the encrypted value.
+
+        Args:
+            other (Union[int, float]): The value to raise to the power of the encrypted value.
+
+        Returns:
+            'Int': A new Int object representing the result of the exponentiation.
+        """
         if isinstance(other, (int, float)):
             return Int(other ** int(self.DeCryptoType(self.value, self.Key)), self.Key)
         return NotImplemented
 
-    def rpow(self, other):
+    def rpow(self, other: Union['Int', Union[int, float]]) -> 'Int':
+        """
+        Exponentiates the given value by the encrypted value.
+
+        Args:
+            other (Union['Int', Union[int, float]]): The value to raise to the power of the encrypted value.
+
+        Returns:
+            'Int': A new Int object representing the result of the exponentiation.
+        """
         if isinstance(other, (int, float)):
             return Int(other ** int(self.DeCryptoType(self.value, self.Key)), self.Key)
         else:
