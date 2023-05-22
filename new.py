@@ -43,7 +43,6 @@ class array:
         elif self.type == 3:
             return encrypt(String, key)
         elif self.type == 4:
-            print("key",key)
             return RSAencrypt(String, key)
 
     def DeCryptoType(self, String: str, key: str):
@@ -54,7 +53,6 @@ class array:
         elif self.type == 3:
             return decrypt(String, key)
         elif self.type == 4:
-            print(key,"decrypt",String)
             return RSAdecrypt(String, key)
 
     def list_to_dic(self, Keys, Values):
@@ -502,7 +500,6 @@ class Dict:
         elif self.type == 3:
             return encrypt(String, key)
         elif self.type == 4:
-            print(String,key,"string","type error")
             return RSAencrypt(String, key)
 
     def DeCryptoType(self, String: str, key: str):
@@ -513,12 +510,10 @@ class Dict:
         elif self.type == 3:
             return decrypt(String, key)
         elif self.type == 4:
-            print(String,type(String),key)
             return RSAdecrypt(String, key)
 
     def list_to_dic(self, Keys, Values):
         res = {}
-        print("keys",Keys)
         for key in Keys:
             for value in Values:
                 res[key] = value
@@ -698,10 +693,8 @@ class Dict:
         temp = []
         temp1 = []
         keys = obj.keys()
-        print("keys in the encrypt : ",keys)
         if operation=="de":
             keys=[ list(i) for i in obj.keys()]
-            print("keys in the decrypt : ",keys)
             
         values = obj.values()
         for i in values:
@@ -747,8 +740,6 @@ class Dict:
                 elif (operation == "de"):
                     if self.type == 4:
                         temp.append(self.DeCryptoType(i, key))
-                        print("values : ",self.DeCryptoType(i, key))
-                        print("temp values : ",temp)
                     else:
                         temp.append(self.DeCryptoType(str(i), key))
                 elif (operation == "str"):
@@ -759,8 +750,6 @@ class Dict:
                     else:
                         temp1.append(i)
         if self.type == 4:
-            print( "runned")
-            print("finnal values : ", temp,temp1)
             return self.list_to_dic([tuple(i) for i in temp1], temp)
         else:
             return self.list_to_dic(temp1, temp)
@@ -776,9 +765,7 @@ class Dict:
         return self.Dict
 
     def to_pyDict(self, key):
-        print(self.Dict,"dict")
         orginal_str = self.dict_type(self.Dict, key, "de")
-        print("decrypt output")
         orginal = self.dict_type(orginal_str, key, "org")
         return orginal
 
@@ -1187,7 +1174,6 @@ class Tuple:
         return self.list_to_dic(temp1, temp)
 
     def count(self, element):
-        print(element)
         if isinstance(element, list):
             obj_string = self.iters(element, self.Key, "str")
         elif isinstance(element, int):
@@ -1220,7 +1206,6 @@ class Tuple:
         return count_is
 
     def to_pytuple(self, key):
-        print(self.Tuple,key)
         orginal = self.iters(self.Tuple, key, "de")
         orginal = self.iters(orginal, key, "org")
         return tuple(orginal)
@@ -1661,9 +1646,7 @@ class Set:
 
     def intersection(self, *argv, security_key=False):
         orginal = self.iters(self.Set, self.Key, "de")
-        print(self.iters(orginal, self.Key, "org"))
         orginal = set(self.iters(orginal, self.Key, "org"))
-        print('orgunal : ', orginal, argv)
         if security_key and security_key == self.Key:
             return orginal.intersection(argv)
         else:
@@ -1846,7 +1829,6 @@ class String:
         elif LongCrypt:
             pass
         else:
-            print(object,Key)
             self.String = self.CryptoType(object, Key)
 
     def CryptoType(self, String: str, key: str):
@@ -1857,7 +1839,6 @@ class String:
         elif self.type == 3:
             return encrypt(String, key)
         elif self.type == 4:
-            print(String,key)
             return RSAencrypt(String, key)
 
     def DeCryptoType(self, String: str, key: str):
@@ -1868,7 +1849,6 @@ class String:
         elif self.type == 3:
             return decrypt(String, key)
         elif self.type == 4:
-            print(String, key)
             return RSAdecrypt(String, key)
 
     def list_to_dic(self, Keys, Values):
@@ -2429,7 +2409,6 @@ class Int:
         elif self.type == 3:
             return encrypt(String, key)
         elif self.type == 4:
-            print(String,key,type(String),"sample")
             return RSAencrypt(String, key)
 
     def DeCryptoType(self, String: str, key: str):
@@ -2440,11 +2419,9 @@ class Int:
         elif self.type == 3:
             return decrypt(String, key)
         elif self.type == 4:
-            print(type(String),String,key)
             return RSAdecrypt(String, key)
 
     def get_int(self, key):
-        print(type(self.value),"check value")
         if key == self.key:
             return self.DeCryptoType(self.value, self.Key)
         elif self.type == 4:
@@ -2681,10 +2658,8 @@ def dict_type(self, obj, key, operation="en"):
         temp = []
         temp1 = []
         keys = obj.keys()
-        print("keys in the encrypt : ",keys)
         if operation=="de" and operation != "org":
             keys=[ list(i) for i in obj.keys()]
-            print("keys in the decrypt : ",keys)
             
         values = obj.values()
         for i in values:
@@ -2741,8 +2716,6 @@ def dict_type(self, obj, key, operation="en"):
                         temp1.append(i)
         if self.type == 4:
             keyss = []
-            print( "runned")
-            print([tuple(i) for i in temp1], temp)
             for i in temp1:
                 if isinstance(i, list):
                     keyss.append(tuple(i))

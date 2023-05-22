@@ -38,7 +38,6 @@ class Tools :
         if type is list:
             return temp
         elif type is tuple:
-            print("working")
             return tuple(temp)
         elif type is set :
             return set(temp)
@@ -191,7 +190,6 @@ class array :
         obj=Tools()
         count_is=0
         hash=obj.Deiters(self.Arrays,list,self.Key)
-        print(hash,Object)
         if isinstance(Object, int):
             count_is = hash.count(str(Object))
         elif isinstance(Object, list):
