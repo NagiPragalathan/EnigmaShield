@@ -5,7 +5,6 @@ import string
 import base64
 from typing import NewType, Union
 import math
-from Designer import BackGroundColor
 
 # auto encode and decode
 
