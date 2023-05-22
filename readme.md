@@ -1112,3 +1112,16 @@ To contribute to the project, please follow these guidelines:
 * [ NagiPragalathan](https://github.com/ShaanCoding/)
 * [github](https://github.com)
 * [python](https://python.org/)
+
+# Name Definition
+```
+
+"EnigmaShield" is a combination of two words: "Enigma" and "Shield."
+
+Enigma: The word "Enigma" refers to something mysterious, puzzling, or difficult to understand. It has a sense of intrigue and secrecy, which aligns with the concept of encryption and security in your module.
+
+Shield: A "Shield" is a protective barrier or defense. It represents the idea of safeguarding and providing a layer of protection against potential threats or unauthorized access.
+
+When combined, "EnigmaShield" conveys the idea of a mysterious and secure shield or protective barrier, emphasizing the encryption and security features of your module. It suggests a solution that offers both encryption and protection for your application or data.
+
+```
